@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Heart, Copy, Share2, RefreshCw } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -107,6 +108,12 @@ const CoupleNameGenerator = () => {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Couple Name Generator — Ship Name Creator", "url": "https://www.wishspark.xyz/tools/couple-name-generator", "description": "Free couple name generator online. Create the perfect ship name by combining two names. Best couple name combiner for Instagram bios & hashtags!", "applicationCategory": "EntertainmentApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "What is a couple name or ship name?", "acceptedAnswer": { "@type": "Answer", "text": "A couple name (or ship name) is a fun combination of two partners' names into one unique name. For example, Brad + Angelina = Brangelina. Our generator creates multiple creative combinations!" }}, { "@type": "Question", "name": "How does the couple name generator work?", "acceptedAnswer": { "@type": "Answer", "text": "Enter both partners' names and our algorithm generates up to 8 creative couple name combinations by blending syllables, initials, and name parts in different ways." }}, { "@type": "Question", "name": "Can I use the couple name for Instagram?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely! Each generated couple name comes with a # hashtag format, perfect for Instagram bios, captions, and social media profiles. Copy with one click!" }}] }} />
       <main className="container mx-auto px-4 py-16 max-w-2xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Tools", href: "/#fun-tools" },
+            { label: "Couple Name Generator" },
+          ]}
+        />
         <div className="text-center mb-8">
           <motion.div className="text-6xl mb-4" animate={{ rotate: [0, 15, -15, 0] }} transition={{ repeat: Infinity, duration: 2 }}>💑</motion.div>
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Couple Name Generator — Ship Name Creator</h1>
