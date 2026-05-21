@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Cake, Copy, Share2, RefreshCw, Link2 } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -102,6 +103,12 @@ const BirthdayWishesGenerator = () => {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Birthday Wishes with Name Generator", "url": "https://www.wishspark.xyz/tools/birthday-wishes-generator", "description": "Free birthday wishes generator with name. Create personalized happy birthday messages ready to share on WhatsApp & social media.", "applicationCategory": "EntertainmentApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "How to create birthday wishes with name?", "acceptedAnswer": { "@type": "Answer", "text": "Simply enter the birthday person's name and click Generate. Our tool creates multiple personalized birthday wishes with their name included, ready to copy and share!" }}, { "@type": "Question", "name": "Can I share birthday wishes on WhatsApp?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Each generated birthday wish has a WhatsApp share button. Click it to instantly send the personalized birthday message to your loved one." }}, { "@type": "Question", "name": "Are these birthday wishes free?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely! Our birthday wishes generator is 100% free with no signup required. Generate unlimited personalized birthday messages anytime." }}] }} />
       <main className="container mx-auto px-4 py-16 max-w-2xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Tools", href: "/#fun-tools" },
+            { label: "Birthday Wishes Generator" },
+          ]}
+        />
         <div className="text-center mb-8">
           <motion.div className="text-6xl mb-4" animate={{ scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 2 }}>🎂</motion.div>
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Birthday Wishes with Name Generator</h1>
