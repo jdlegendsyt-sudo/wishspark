@@ -47,7 +47,7 @@ const Index = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-16 md:py-28">
+      <section id="main-content" className="relative py-16 md:py-28">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto space-y-5">
             <div className="flex justify-center">
@@ -58,10 +58,10 @@ const Index = () => {
 
             <h1 className="text-4xl md:text-7xl font-display font-bold">
               <span className="text-gold-gradient">WishSpark</span>
+              <span className="block text-xl md:text-2xl text-foreground font-display mt-2 font-semibold">
+                Free Festival Greeting Card Maker Online
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-foreground font-display">
-              Free Festival Greeting Card Maker Online
-            </p>
             <p className="text-muted-foreground max-w-xl mx-auto">
               Create wishes card online with your name — Independence Day wishes, Diwali greetings,
               Christmas cards & 35+ festivals. Share personalized animated wishes instantly! ✨
