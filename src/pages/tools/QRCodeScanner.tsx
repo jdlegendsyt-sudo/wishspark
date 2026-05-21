@@ -13,6 +13,7 @@ import jsQR from "jsqr";
 import { Camera, Copy, ScanLine, Upload } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import AdBanner from "@/components/AdBanner";
@@ -398,6 +399,12 @@ const QRCodeScanner = () => {
       ] }} />
 
       <main className="container mx-auto px-4 py-16 max-w-5xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Tools", href: "/#fun-tools" },
+            { label: "QR Code Scanner" },
+          ]}
+        />
         <div className="text-center mb-10 max-w-3xl mx-auto">
           <motion.div className="text-6xl mb-4" animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 2 }}>📷</motion.div>
           <h1 className="text-4xl md:text-5xl font-display font-bold text-gold-gradient mb-4">QR Code Scanner Online</h1>
