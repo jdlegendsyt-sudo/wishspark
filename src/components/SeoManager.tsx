@@ -438,7 +438,86 @@ const SeoManager = () => {
     } else {
       articleModifiedMeta.remove();
     }
-  }, [meta]);
+
+    // Structured Data (Schema.org)
+    let schema: object | null = null;
+    const normalizedPath = normalizePath(location.pathname);
+
+    if (meta.type === "article") {
+      schema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": optimizedTitle,
+        "description": optimizedDescription,
+        "url": canonicalUrl,
+        "image": SITE_OG_IMAGE,
+        "datePublished": meta.articlePublishedTime ?? new Date().toISOString(),
+        "dateModified": meta.articleModifiedTime ?? new Date().toISOString(),
+        "author": {
+          "@type": "Person",
+          "name": meta.articleAuthor ?? "WishSpark Team"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": SITE_NAME,
+          "url": SITE_URL,
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${SITE_URL}/favicon.svg`
+          }
+        }
+      };
+    } else if (TOOL_SEO[normalizedPath]) {
+      schema = {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": optimizedTitle,
+        "description": optimizedDescription,
+        "url": canonicalUrl,
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": SITE_NAME,
+          "url": SITE_URL
+        }
+      };
+    } else if (normalizedPath === "/") {
+      schema = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "description": optimizedDescription,
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": `${SITE_URL}/blog?q={search_term_string}`
+          },
+          "query-input": "required name=search_term_string"
+        }
+      };
+    }
+
+    let schemaScript = document.head.querySelector("#schema-org") as HTMLScriptElement | null;
+    if (schema) {
+      if (!schemaScript) {
+        schemaScript = document.createElement("script");
+        schemaScript.setAttribute("type", "application/ld+json");
+        schemaScript.setAttribute("id", "schema-org");
+        document.head.appendChild(schemaScript);
+      }
+      schemaScript.textContent = JSON.stringify(schema);
+    } else if (schemaScript) {
+      schemaScript.remove();
+    }
+  }, [meta, location.pathname]);
 
   return null;
 };
