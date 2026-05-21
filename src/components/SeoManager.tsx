@@ -100,7 +100,7 @@ const TOOL_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
     type: "website",
   },
   "/tools/instagram-hashtag-generator": {
-    title: "Instagram Hashtag Generator | Hashtags for Growth | WishSpark",
+    title: "Instagram Hashtag Generator Free Online | WishSpark",
     description: "Generate Instagram hashtags for reels, creators, and business posts. Build relevant hashtag sets for reach, discovery, and niche growth.",
     keywords: ["instagram hashtag generator", "hashtags for instagram growth", "instagram hashtag tool", "reels hashtags", "niche hashtag generator"],
     type: "website",
@@ -121,7 +121,7 @@ const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
     type: "website",
   },
   "/blog": {
-    title: "WishSpark Blog | Festival Wishes, Greeting Ideas, and Celebration Tips",
+    title: "WishSpark Blog | Greeting Ideas & Festival Tips",
     description: "Read WishSpark blog articles about festival traditions, greeting ideas, WhatsApp sharing tips, and celebration stories for Indian and global occasions.",
     keywords: ["festival blog", "greeting ideas blog", "festival wishes articles", "celebration tips", "WishSpark blog"],
     type: "website",
@@ -145,7 +145,7 @@ const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
     type: "website",
   },
   "/editorial-policy": {
-    title: "Editorial Policy | WishSpark Content Standards and Review Process",
+    title: "Editorial Policy | WishSpark Content Standards",
     description: "Read the WishSpark editorial policy covering content quality standards, fact checks, human review, updates, corrections, and advertising independence.",
     keywords: ["WishSpark editorial policy", "content quality standards", "fact checking policy", "corrections policy", "ad editorial independence"],
     type: "website",
@@ -494,14 +494,6 @@ const SeoManager = () => {
         "name": SITE_NAME,
         "url": SITE_URL,
         "description": optimizedDescription,
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": `${SITE_URL}/blog?q={search_term_string}`
-          },
-          "query-input": "required name=search_term_string"
-        }
       };
     }
 
@@ -517,6 +509,34 @@ const SeoManager = () => {
     } else if (schemaScript) {
       schemaScript.remove();
     }
+
+    // Organization schema — site-wide for E-E-A-T
+    let orgScript = document.head.querySelector("#org-schema") as HTMLScriptElement | null;
+    if (!orgScript) {
+      orgScript = document.createElement("script");
+      orgScript.setAttribute("type", "application/ld+json");
+      orgScript.setAttribute("id", "org-schema");
+      document.head.appendChild(orgScript);
+    }
+    orgScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": SITE_NAME,
+      "url": SITE_URL,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${SITE_URL}/og-image.png`,
+        "width": 1200,
+        "height": 630
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@wishspark.xyz",
+        "contactType": "customer support",
+        "availableLanguage": ["English"]
+      },
+      "sameAs": []
+    });
   }, [meta, location.pathname]);
 
   return null;
