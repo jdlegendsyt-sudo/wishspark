@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Heart, Share2, Copy } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -99,6 +100,12 @@ const LoveCalculator = () => {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Love Calculator by Name", "url": "https://www.wishspark.xyz/tools/love-calculator", "description": "Free love calculator by name online. Find your true love percentage and love compatibility score instantly.", "applicationCategory": "EntertainmentApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "How does the love calculator work?", "acceptedAnswer": { "@type": "Answer", "text": "Our love calculator uses a name-based compatibility algorithm to generate a fun love percentage between two people. Enter both names and get your love score instantly!" }}, { "@type": "Question", "name": "Is the love calculator accurate?", "acceptedAnswer": { "@type": "Answer", "text": "The love calculator is a fun entertainment tool that generates a compatibility percentage based on names. It's meant for fun and sharing with your partner or crush!" }}, { "@type": "Question", "name": "Can I share my love calculator result?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! After calculating your love percentage, click the Share button to send your result directly via WhatsApp to your partner or friends." }}] }} />
       <main className="container mx-auto px-4 py-16 max-w-2xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Tools", href: "/#fun-tools" },
+            { label: "Love Calculator" },
+          ]}
+        />
         <div className="text-center mb-8">
           <motion.div className="text-6xl mb-4" animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 1.2 }}>💕</motion.div>
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Love Calculator — True Love Percentage Test</h1>
