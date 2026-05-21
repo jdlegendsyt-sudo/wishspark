@@ -59,6 +59,16 @@ const Footer = () => {
               <li><Link to="/diwali-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Diwali Wishes</Link></li>
               <li><Link to="/birthday-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Birthday Wishes</Link></li>
               <li><Link to="/new-year-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">New Year Wishes</Link></li>
+              <li><Link to="/eid-mubarak-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Eid Mubarak Wishes</Link></li>
+              <li><Link to="/holi-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Holi Wishes</Link></li>
+              <li><Link to="/raksha-bandhan-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Raksha Bandhan Wishes</Link></li>
+              <li><Link to="/valentines-day-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Valentine's Day Wishes</Link></li>
+              <li><Link to="/mothers-day-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Mother's Day Wishes</Link></li>
+              <li><Link to="/fathers-day-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Father's Day Wishes</Link></li>
+              <li><Link to="/independence-day-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Independence Day</Link></li>
+              <li><Link to="/thanksgiving-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Thanksgiving Wishes</Link></li>
+              <li><Link to="/vishu-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Vishu Wishes</Link></li>
+              <li><Link to="/navratri-wishes" className="text-sm text-muted-foreground hover:text-primary transition-colors">Navratri Wishes</Link></li>
             </ul>
           </div>
 
