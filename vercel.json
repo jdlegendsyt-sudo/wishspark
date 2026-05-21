@@ -1,7 +1,27 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "wishspark.xyz" }],
+      "destination": "https://www.wishspark.xyz/$1",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/ads.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain" }
+      ]
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/ads.txt",
+      "destination": "/ads.txt"
+    },
     {
       "source": "/((?!.*\\..*).*)",
       "destination": "/index.html"
