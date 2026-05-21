@@ -106,8 +106,11 @@ const DiwaliLamp = ({ senderName, accentColor, onOpen }: DiwaliLampProps) => {
           {/* Clay lamp image */}
           <img
             src="/images/clay-lamp.png"
-            alt="Traditional Kerala Clay Oil Lamp"
+            alt="Traditional Kerala Clay Oil Lamp for Diwali wishes"
             className="w-full h-full object-contain drop-shadow-2xl"
+            width={1024}
+            height={1024}
+            loading="lazy"
           />
 
           {/* Flame effect on click */}
