@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Flame, Share2, RefreshCw, Copy } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -99,6 +100,12 @@ const CrushCalculator = () => {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Crush Calculator — Does My Crush Like Me?", "url": "https://www.wishspark.xyz/tools/crush-calculator", "description": "Free crush calculator online. Find out if your crush likes you back with our crush compatibility test by name.", "applicationCategory": "EntertainmentApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "How to know if my crush likes me?", "acceptedAnswer": { "@type": "Answer", "text": "Try our fun crush calculator! Enter your name and your crush's name to get a crush compatibility percentage. While it's for entertainment, it's a fun way to start a conversation!" }}, { "@type": "Question", "name": "What is a crush calculator?", "acceptedAnswer": { "@type": "Answer", "text": "A crush calculator is a fun online tool that calculates compatibility between you and your crush based on your names. It generates a percentage score with a fun message about your chances." }}, { "@type": "Question", "name": "Can I share my crush calculator result?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! You can share your crush compatibility result via WhatsApp directly from the results page. It's a fun way to tease your friends!" }}] }} />
       <main className="container mx-auto px-4 py-16 max-w-2xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Tools", href: "/#fun-tools" },
+            { label: "Crush Calculator" },
+          ]}
+        />
         <div className="text-center mb-8">
           <motion.div className="text-6xl mb-4" animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>🔥</motion.div>
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Crush Calculator — Does My Crush Like Me?</h1>
