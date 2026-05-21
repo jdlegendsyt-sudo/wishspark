@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import AdBanner from "@/components/AdBanner";
 import { toast } from "@/hooks/use-toast";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 
 const renderInlineContent = (text: string) => {
   const parts = text.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g);
@@ -161,13 +162,13 @@ const BlogPost = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 py-8 md:py-16 max-w-3xl">
-        {/* Back link */}
-        <Link
-          to="/blog"
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
-        >
-          <span aria-hidden="true">←</span> Back to Blog
-        </Link>
+        {/* Breadcrumb Navigation */}
+        <SeoBreadcrumbs
+          items={[
+            { label: "Blog", href: "/blog" },
+            { label: post.title },
+          ]}
+        />
 
         {/* Article header */}
         <article>
@@ -189,6 +190,11 @@ const BlogPost = () => {
                 <span className="flex items-center gap-1.5">
                   <span aria-hidden="true">📅</span> {post.date}
                 </span>
+                {post.updatedDate && post.updatedDate !== post.date && (
+                  <span className="flex items-center gap-1.5">
+                    <span aria-hidden="true">🔄</span> Updated: {post.updatedDate}
+                  </span>
+                )}
                 <span className="flex items-center gap-1.5">
                   <span aria-hidden="true">⏱️</span> {post.readTime}
                 </span>
