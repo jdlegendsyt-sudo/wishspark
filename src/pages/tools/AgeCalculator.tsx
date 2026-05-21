@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Calculator, Share2, Copy } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -147,6 +148,12 @@ const AgeCalculator = () => {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Age Calculator Online Free", "url": "https://www.wishspark.xyz/tools/age-calculator", "description": "Free age calculator online. Calculate exact age from date of birth in years, months, and days. Find how many days until your next birthday.", "applicationCategory": "UtilityApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "How to calculate my exact age from date of birth?", "acceptedAnswer": { "@type": "Answer", "text": "Enter your date of birth in our free age calculator. It instantly calculates your exact age in years, months, and days, plus total days lived and days until your next birthday." }}, { "@type": "Question", "name": "Is this age calculator accurate?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Our age calculator accounts for leap years and varying month lengths to give you a precise age calculation down to the exact day." }}, { "@type": "Question", "name": "Can I find how many days until my next birthday?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely! Our age calculator automatically shows the number of days remaining until your next birthday after you enter your date of birth." }}] }} />
       <main className="container mx-auto px-4 py-16 max-w-2xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Tools", href: "/#fun-tools" },
+            { label: "Age Calculator" },
+          ]}
+        />
         <div className="text-center mb-8">
           <motion.div className="text-6xl mb-4" animate={{ rotate: [0, 360] }} transition={{ repeat: Infinity, duration: 8, ease: "linear" }}>🧮</motion.div>
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Age Calculator Online — Calculate Exact Age</h1>
