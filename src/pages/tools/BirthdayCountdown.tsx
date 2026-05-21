@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Clock, Share2, Copy } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -95,6 +96,12 @@ const BirthdayCountdown = () => {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Birthday Countdown Timer", "url": "https://www.wishspark.xyz/tools/birthday-countdown", "description": "Free birthday countdown timer online. Find out how many days, hours, minutes until your next birthday with live countdown.", "applicationCategory": "UtilityApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "How many days until my birthday?", "acceptedAnswer": { "@type": "Answer", "text": "Enter your date of birth in our birthday countdown timer to see exactly how many days, hours, minutes, and seconds remain until your next birthday — updated live in real time!" }}, { "@type": "Question", "name": "Does the birthday countdown update in real time?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Our birthday countdown timer updates every second, showing a live countdown with days, hours, minutes, and seconds until your next birthday." }}, { "@type": "Question", "name": "Can I share my birthday countdown?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! You can share your birthday countdown via WhatsApp to let friends and family know how many days are left until your special day." }}] }} />
       <main className="container mx-auto px-4 py-16 max-w-2xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Tools", href: "/#fun-tools" },
+            { label: "Birthday Countdown" },
+          ]}
+        />
         <div className="text-center mb-8">
           <motion.div className="text-6xl mb-4" animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 1.5 }}>⏳</motion.div>
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Birthday Countdown Timer — How Many Days Until My Birthday</h1>
