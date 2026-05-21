@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Share2 } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -76,6 +77,12 @@ const BirthdayCardMaker = () => {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Birthday Card Maker Online Free", "url": "https://www.wishspark.xyz/tools/birthday-card-maker", "description": "Free birthday card maker online. Create beautiful birthday greeting cards with name and custom message. No signup required!", "applicationCategory": "DesignApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "How to make a birthday card online free?", "acceptedAnswer": { "@type": "Answer", "text": "Use our free birthday card maker! Enter the person's name, write a custom message, choose a beautiful theme, and your card is ready to share via WhatsApp — no signup needed!" }}, { "@type": "Question", "name": "Can I customize my birthday card?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! You can add the recipient's name, write a personal message, and choose from 6 beautiful color themes including Gold, Purple, Blue, Rose, Green, and Sunset." }}, { "@type": "Question", "name": "Is the birthday card maker free to use?", "acceptedAnswer": { "@type": "Answer", "text": "100% free! No signup, no downloads, no watermarks. Create unlimited birthday cards and share them instantly via WhatsApp." }}] }} />
       <main className="container mx-auto px-4 py-16 max-w-3xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Tools", href: "/#fun-tools" },
+            { label: "Birthday Card Maker" },
+          ]}
+        />
         <div className="text-center mb-8">
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Birthday Card Maker Online Free</h1>
           <p className="text-muted-foreground">Design beautiful birthday greeting cards online free — create birthday wishes card with name, no signup required!</p>
