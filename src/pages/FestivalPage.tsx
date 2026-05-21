@@ -17,6 +17,7 @@ import { getFestivalFaqs } from "@/data/festivalFaqs";
 import FaqAccordion from "@/components/FaqAccordion";
 import { Button } from "@/components/ui/button";
 import AdBanner from "@/components/AdBanner";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 
 const FestivalPage = () => {
   const location = useLocation();
@@ -132,6 +133,12 @@ const FestivalPage = () => {
     <div className="min-h-screen bg-background relative">
       <Header />
       <main className="container mx-auto px-4 py-8">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Festival Wishes", href: "/#choose-festival" },
+            { label: `${festival.name} Wishes` },
+          ]}
+        />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -145,7 +152,7 @@ const FestivalPage = () => {
             {festival.emoji}
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-display font-bold text-gold-gradient glow-gold">
-            {festival.greeting}
+            {festival.name} Wishes — {festival.greeting}
           </h1>
           <p className="text-muted-foreground max-w-lg mx-auto">
             {festival.description} Create free {festival.name} wishes card with your name and share online!
