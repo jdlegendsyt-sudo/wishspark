@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Users, Share2, Copy } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
+import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -97,6 +98,12 @@ const FriendshipCalculator = () => {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", "name": "Friendship Calculator — Friendship Percentage Test", "url": "https://www.wishspark.xyz/tools/friendship-calculator", "description": "Free friendship calculator online. Test your friendship percentage and compatibility by name. Best friendship meter to check how strong your friendship is!", "applicationCategory": "EntertainmentApplication", "operatingSystem": "All", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@type": "Organization", "name": "WishSpark" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": "How to test friendship compatibility?", "acceptedAnswer": { "@type": "Answer", "text": "Enter your name and your friend's name in our friendship calculator. It generates a friendship percentage score with a fun compatibility message about your bond!" }}, { "@type": "Question", "name": "What is a friendship percentage calculator?", "acceptedAnswer": { "@type": "Answer", "text": "A friendship percentage calculator is a fun tool that measures the compatibility between two friends based on their names. It gives a score from 60-100% with a friendship level title." }}, { "@type": "Question", "name": "Can I share my friendship score?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Share your friendship calculator result via WhatsApp with the Share button. It's perfect for Friendship Day celebrations and group chats!" }}] }} />
       <main className="container mx-auto px-4 py-16 max-w-2xl">
+        <SeoBreadcrumbs
+          items={[
+            { label: "Tools", href: "/#fun-tools" },
+            { label: "Friendship Calculator" },
+          ]}
+        />
         <div className="text-center mb-8">
           <motion.div className="text-6xl mb-4" animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>👯</motion.div>
           <h1 className="text-4xl font-display font-bold text-gold-gradient mb-3">Friendship Calculator — Friendship Percentage Test</h1>
