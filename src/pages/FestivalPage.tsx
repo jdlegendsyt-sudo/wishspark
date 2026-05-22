@@ -135,7 +135,6 @@ const FestivalPage = () => {
       <main className="container mx-auto px-4 py-8">
         <SeoBreadcrumbs
           items={[
-            { label: "Festival Wishes", href: "/#choose-festival" },
             { label: `${festival.name} Wishes` },
           ]}
         />
