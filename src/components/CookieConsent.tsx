@@ -16,14 +16,17 @@ const CookieConsent = () => {
   useEffect(() => {
     const consent = localStorage.getItem("cookie-consent");
     if (!consent) {
-      const timer = setTimeout(() => setVisible(true), 1500);
+      // FIX 7: 1500ms → 500ms ആക്കി
+      // index.html-ൽ wait_for_update 2500ms ആണ്, അതിനുള്ളിൽ banner കാണിക്കണം
+      // User-ന് consent ചെയ്യാൻ time കൊടുക്കുക — revenue maximize
+      const timer = setTimeout(() => setVisible(true), 500);
       return () => clearTimeout(timer);
     }
   }, []);
 
   const accept = () => {
     localStorage.setItem("cookie-consent", "accepted");
-    // ✅ FIX: Consent Mode v2 - accept ചെയ്യുമ്പോൾ personalized ads enable
+    // Consent Mode v2 — accept ചെയ്യുമ്പോൾ personalized ads enable
     window.gtag?.("consent", "update", {
       ad_storage: "granted",
       ad_user_data: "granted",
@@ -35,8 +38,8 @@ const CookieConsent = () => {
 
   const decline = () => {
     localStorage.setItem("cookie-consent", "declined");
-    // ✅ FIX: Decline ആയാലും ads കാണിക്കും — non-personalized mode
-    // Google Consent Mode v2 default denied ആണ്, so no update needed
+    // Decline ആയാലും ads കാണിക്കും — non-personalized mode
+    // Google Consent Mode v2 default denied ആണ്
     // Ads show ആകും but personalization ഉണ്ടാകില്ല — policy compliant!
     window.gtag?.("consent", "update", {
       ad_storage: "denied",
@@ -60,7 +63,7 @@ const CookieConsent = () => {
         <Cookie className="w-6 h-6 text-primary shrink-0 mt-0.5 sm:mt-0" />
         <p className="text-xs md:text-sm text-muted-foreground flex-1">
           We use cookies to enhance your experience and serve relevant ads via Google AdSense.
-          By clicking "Accept", you consent to personalised ads and analytics.{" "}
+          By clicking &quot;Accept&quot;, you consent to personalised ads and analytics.{" "}
           Declining shows non-personalised ads only.{" "}
           <Link to="/privacy-policy" className="text-primary underline">
             Privacy Policy
