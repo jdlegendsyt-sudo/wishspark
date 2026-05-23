@@ -4,6 +4,12 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Cookie } from "lucide-react";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
 
@@ -17,11 +23,27 @@ const CookieConsent = () => {
 
   const accept = () => {
     localStorage.setItem("cookie-consent", "accepted");
+    // ✅ FIX: Consent Mode v2 - accept ചെയ്യുമ്പോൾ personalized ads enable
+    window.gtag?.("consent", "update", {
+      ad_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
+      analytics_storage: "granted",
+    });
     setVisible(false);
   };
 
   const decline = () => {
     localStorage.setItem("cookie-consent", "declined");
+    // ✅ FIX: Decline ആയാലും ads കാണിക്കും — non-personalized mode
+    // Google Consent Mode v2 default denied ആണ്, so no update needed
+    // Ads show ആകും but personalization ഉണ്ടാകില്ല — policy compliant!
+    window.gtag?.("consent", "update", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+    });
     setVisible(false);
   };
 
@@ -38,7 +60,8 @@ const CookieConsent = () => {
         <Cookie className="w-6 h-6 text-primary shrink-0 mt-0.5 sm:mt-0" />
         <p className="text-xs md:text-sm text-muted-foreground flex-1">
           We use cookies to enhance your experience and serve relevant ads via Google AdSense.
-          By clicking "Accept", you consent to our use of cookies.{" "}
+          By clicking "Accept", you consent to personalised ads and analytics.{" "}
+          Declining shows non-personalised ads only.{" "}
           <Link to="/privacy-policy" className="text-primary underline">
             Privacy Policy
           </Link>
