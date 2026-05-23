@@ -12,6 +12,7 @@ interface AdBannerProps {
 declare global {
   interface Window {
     adsbygoogle: Array<Record<string, unknown>>;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -55,8 +56,10 @@ const festivalPaths = new Set(festivals.map((festival) => `/${festival.slug}`));
 
 const isAdEligiblePath = (pathname: string) => {
   if (pathname.startsWith("/blog/")) return true;
+  // ✅ FIX: Tools pages-ൽ മാത്രം ads OFF, festival pages-ൽ ON
   if (pathname.startsWith("/tools/")) return false;
-  if (festivalPaths.has(pathname)) return false;
+  // ✅ FIX: Festival pages-ൽ ads enable - ഇതാണ് ഏറ്റവും കൂടുതൽ traffic!
+  if (festivalPaths.has(pathname)) return true;
   return ALLOWED_AD_PATHS.has(pathname);
 };
 
@@ -66,30 +69,59 @@ const AdBanner = ({ adSlot, adFormat = "auto", fullWidth = true, className = "" 
   const resolvedAdSlot = resolveAdSlot(adSlot);
   const location = useLocation();
 
-  // Respect a user's explicit rejection of advertising cookies.
-  const consent = typeof window !== "undefined" ? localStorage.getItem("cookie-consent") : null;
-  const allowAds = consent !== "declined";
+  // ✅ FIX: Route change ആകുമ്പോൾ pushed reset ചെയ്യുക (SPA fix)
+  useEffect(() => {
+    pushed.current = false;
+  }, [location.pathname]);
+
+  // ✅ FIX: Cookie consent check - declined ആയാലും non-personalized ads കാണിക്കും
+  // Google Consent Mode v2 handle ചെയ്യുന്നത് index.html-ൽ ആണ്
   const allowAdsOnPath = isAdEligiblePath(location.pathname);
 
   useEffect(() => {
-    if (pushed.current || !allowAds || !allowAdsOnPath || !resolvedAdSlot) return;
-    try {
-      if (window.adsbygoogle) {
-        window.adsbygoogle.push({});
-        pushed.current = true;
-      }
-    } catch (e) {
-      console.log("AdSense not loaded yet");
-    }
-  }, [allowAds, allowAdsOnPath, resolvedAdSlot]);
+    if (pushed.current || !allowAdsOnPath || !resolvedAdSlot) return;
 
-  if (!allowAds || !allowAdsOnPath || !resolvedAdSlot) return null;
+    // ✅ FIX: Retry mechanism - script load ആകുന്നത് wait ചെയ്യുക
+    const pushAd = () => {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        pushed.current = true;
+      } catch (e) {
+        console.error("AdSense push error:", e);
+      }
+    };
+
+    if (window.adsbygoogle) {
+      pushAd();
+    } else {
+      // Script load ആകുന്നത് wait ചെയ്ത് retry ചെയ്യുക
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (window.adsbygoogle) {
+          pushAd();
+          clearInterval(interval);
+        } else if (attempts >= 20) {
+          // 6 seconds കഴിഞ്ഞാൽ stop
+          clearInterval(interval);
+        }
+      }, 300);
+      return () => clearInterval(interval);
+    }
+  }, [allowAdsOnPath, resolvedAdSlot, location.pathname]);
+
+  if (!allowAdsOnPath || !resolvedAdSlot) return null;
 
   return (
     <div className={`w-full flex justify-center ${className}`} ref={adRef}>
       <ins
         className="adsbygoogle"
-        style={{ display: "block", width: fullWidth ? "100%" : "auto" }}
+        style={{
+          display: "block",
+          width: fullWidth ? "100%" : "auto",
+          // ✅ FIX: minHeight add ചെയ്തു - CLS (Layout Shift) ഒഴിവാക്കാൻ
+          minHeight: adFormat === "vertical" ? "600px" : adFormat === "rectangle" ? "250px" : "90px",
+        }}
         data-ad-client="ca-pub-3907372619896669"
         data-ad-slot={resolvedAdSlot}
         data-ad-format={adFormat}
