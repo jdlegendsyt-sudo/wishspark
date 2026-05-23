@@ -1,18 +1,19 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- ✅ FIX 1: Consent Mode v2 - MUST be first, before any Google scripts -->
+    <!-- ✅ Consent Mode v2 - MUST be first, before any Google scripts -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
 
       // Default: all denied until user gives consent
+      // FIX 1: wait_for_update 500 → 2500ms (banner കണ്ട് user decide ചെയ്യാൻ time)
       gtag('consent', 'default', {
         'ad_storage': 'denied',
         'ad_user_data': 'denied',
         'ad_personalization': 'denied',
         'analytics_storage': 'denied',
-        'wait_for_update': 500
+        'wait_for_update': 2500
       });
 
       // If user already accepted, restore consent immediately
@@ -92,7 +93,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" /></noscript>
 
-    <!-- ✅ FIX 2: AdSense script - async load -->
+    <!-- AdSense script - async load -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3907372619896669"
      crossorigin="anonymous"></script>
   </head>
