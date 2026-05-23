@@ -1,14 +1,42 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M034TWZEXL"></script>
+    <!-- ✅ FIX 1: Consent Mode v2 - MUST be first, before any Google scripts -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+
+      // Default: all denied until user gives consent
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500
+      });
+
+      // If user already accepted, restore consent immediately
+      (function(){
+        var c = localStorage.getItem('cookie-consent');
+        if (c === 'accepted') {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+          });
+        }
+        // 'declined' → stays denied but ads still show (non-personalized)
+      })();
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M034TWZEXL"></script>
+    <script>
       gtag('js', new Date());
       gtag('config', 'G-M034TWZEXL');
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#d9a441" />
@@ -64,6 +92,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" /></noscript>
 
+    <!-- ✅ FIX 2: AdSense script - async load -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3907372619896669"
      crossorigin="anonymous"></script>
   </head>
