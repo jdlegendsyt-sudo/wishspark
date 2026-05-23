@@ -35,6 +35,7 @@ const FestivalPage = () => {
 
   const isEaster = festival?.slug === "easter-wishes";
   const isDiwali = festival?.slug === "diwali-wishes";
+
   useEffect(() => {
     if (senderName && !showCreate && !giftOpened) {
       const timer = setTimeout(() => {
@@ -150,9 +151,19 @@ const FestivalPage = () => {
           >
             {festival.emoji}
           </motion.div>
+
+          {/*
+            FIX: H1 now leads with primary keyword "X Wishes with Name" — matches
+            the page title and what users actually search for. The festival greeting
+            tagline moves to a visible subtitle paragraph below, keeping it prominent
+            but not in the H1 tag itself.
+          */}
           <h1 className="text-4xl md:text-5xl font-display font-bold text-gold-gradient glow-gold">
-            {festival.name} Wishes — {festival.greeting}
+            {festival.name} Wishes with Name
           </h1>
+          <p className="text-2xl font-display text-gold/80">
+            {festival.greeting}
+          </p>
           <p className="text-muted-foreground max-w-lg mx-auto">
             {festival.description} Create free {festival.name} wishes card with your name and share online!
           </p>
@@ -178,7 +189,7 @@ const FestivalPage = () => {
 
           <div className="bg-glass rounded-2xl p-6 md:p-8 border border-gold/10">
             <h2 className="text-xl font-display font-semibold text-foreground mb-4">
-              How to Send {festival.name} Wishes
+              How to Send {festival.name} Wishes with Name
             </h2>
             <ol className="space-y-3 text-sm text-muted-foreground">
               <li className="flex gap-3">
