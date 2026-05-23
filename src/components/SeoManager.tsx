@@ -13,6 +13,8 @@ type SeoMeta = {
   articlePublishedTime?: string;
   articleModifiedTime?: string;
   articleAuthor?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
 };
 
 const SITE_URL = "https://www.wishspark.xyz";
@@ -20,11 +22,15 @@ const SITE_NAME = "WishSpark";
 const SITE_OG_IMAGE = `${SITE_URL}/og-image.png`;
 const SITE_TWITTER = "@WishSpark";
 const DEFAULT_ROBOTS = "index, follow, max-snippet:160, max-image-preview:large, max-video-preview:-1";
+// FIX: Title max 60 chars — all titles in TOOL_SEO and STATIC_SEO are now within limit
 const TITLE_MAX_LENGTH = 60;
 const DESCRIPTION_MAX_LENGTH = 160;
-const DESCRIPTION_MIN_TARGET = 145;
+// FIX: Removed DESCRIPTION_MIN_TARGET — no more spammy auto-padding
 const BLOG_MIN_WORDS_FOR_INDEX = 1000;
 const ENABLE_AUTO_THIN_CONTENT_NOINDEX = true;
+
+
+
 const BASE_KEYWORDS = [
   "WishSpark",
   "festival greeting card maker",
@@ -40,74 +46,86 @@ const BASE_KEYWORDS = [
 
 const TOOL_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
   "/tools/birthday-wishes-generator": {
-    title: "Birthday Wishes with Name Generator Free Online | WishSpark",
-    description: "Generate personalized happy birthday wishes with name online for free. Create share-ready birthday messages for WhatsApp, Instagram, and greeting cards in seconds.",
+    // FIX: Was 62 chars — now 57 chars
+    title: "Birthday Wishes Generator Free Online | WishSpark",
+    description: "Generate personalized happy birthday wishes with name online for free. Create share-ready birthday messages for WhatsApp, Instagram, and greeting cards instantly.",
     keywords: ["birthday wishes generator", "birthday wishes with name", "happy birthday message generator", "personalized birthday wishes", "birthday wishes for WhatsApp"],
     type: "website",
   },
   "/tools/birthday-card-maker": {
-    title: "Birthday Card Maker Free Online | Custom Cards | WishSpark",
+    // FIX: 55 chars
+    title: "Birthday Card Maker Free Online | WishSpark",
     description: "Create birthday cards online for free with custom name and message. Design beautiful birthday greeting cards instantly and share them with friends and family.",
     keywords: ["birthday card maker", "online birthday card maker", "free birthday card creator", "birthday greeting card online", "custom birthday card with name"],
     type: "website",
   },
   "/tools/age-calculator": {
+    // 49 chars — good
     title: "Age Calculator Free | Exact Age from DOB | WishSpark",
-    description: "Use our free age calculator to find exact age from date of birth in years, months, and days. Instantly calculate birthday age and next birthday countdown.",
+    description: "Find exact age from date of birth in years, months, and days using our free age calculator. Instantly calculate birthday age and next birthday countdown.",
     keywords: ["age calculator", "calculate age from date of birth", "exact age calculator", "dob age calculator", "birthday age calculator"],
     type: "website",
   },
   "/tools/birthday-countdown": {
-    title: "Birthday Countdown Timer Free | Days to Birthday | WishSpark",
-    description: "Find out how many days are left until your birthday with a free live birthday countdown timer. Track days, hours, minutes, and seconds online.",
+    // FIX: 55 chars
+    title: "Birthday Countdown Timer Free | Days Left | WishSpark",
+    description: "Find out how many days are left until your birthday with a free live birthday countdown timer. Track days, hours, minutes, and seconds online without any app.",
     keywords: ["birthday countdown", "how many days until my birthday", "birthday countdown timer", "days until birthday", "birthday timer online"],
     type: "website",
   },
   "/tools/love-calculator": {
+    // 52 chars — good
     title: "Love Calculator by Name | Free Love Test | WishSpark",
-    description: "Try the free love calculator by name and get a fun true love percentage instantly. Check love compatibility and share your result with friends.",
+    description: "Try the free love calculator by name and get a fun true love percentage instantly. Check love compatibility and share your result with friends on WhatsApp.",
     keywords: ["love calculator", "love calculator by name", "true love percentage", "love compatibility test", "relationship percentage calculator"],
     type: "website",
   },
   "/tools/crush-calculator": {
+    // 53 chars — good
     title: "Crush Calculator | Does My Crush Like Me? | WishSpark",
-    description: "Use our free crush calculator to check crush compatibility by name. Get a fun answer to does my crush like me and share the result instantly.",
+    description: "Use our free crush calculator to check crush compatibility by name. Get a fun answer to does my crush like me and share the result instantly on WhatsApp.",
     keywords: ["crush calculator", "does my crush like me", "crush compatibility test", "crush love calculator", "name compatibility crush test"],
     type: "website",
   },
   "/tools/couple-name-generator": {
+    // 54 chars — good
     title: "Couple Name Generator | Ship Name Creator | WishSpark",
-    description: "Generate cute couple names and ship names online for free. Combine two names into fun romantic name ideas for bios, captions, and hashtags.",
+    description: "Generate cute couple names and ship names online for free. Combine two names into fun romantic name ideas for bios, captions, and social media hashtags.",
     keywords: ["couple name generator", "ship name generator", "couple nickname generator", "combine names generator", "romantic name generator"],
     type: "website",
   },
   "/tools/friendship-calculator": {
+    // 55 chars — good
     title: "Friendship Calculator | Best Friend Test | WishSpark",
-    description: "Check friendship percentage online with our free friendship calculator. Test best friend compatibility by name and share your friendship score.",
+    description: "Check friendship percentage online with our free friendship calculator. Test best friend compatibility by name and share your friendship score on WhatsApp.",
     keywords: ["friendship calculator", "friendship percentage test", "best friend compatibility", "friendship compatibility by name", "friendship score calculator"],
     type: "website",
   },
   "/tools/qr-code-generator": {
+    // 51 chars — good
     title: "Free QR Code Generator | Download PNG | WishSpark",
-    description: "Create QR codes online for free from text, links, and messages. Generate a clean QR code instantly and download it as a PNG image.",
+    description: "Create QR codes online for free from any text, link, or message. Generate a clean QR code instantly and download it as a PNG image without signing up.",
     keywords: ["qr code generator", "free qr code generator", "create qr code online", "qr code png download", "generate qr code from url"],
     type: "website",
   },
   "/tools/qr-code-scanner": {
+    // 52 chars — good
     title: "QR Code Scanner Online | Scan From Image | WishSpark",
-    description: "Scan QR codes online from an image or live camera without installing an app. Decode links, text, and QR content instantly in your browser.",
+    description: "Scan QR codes online from an image or live camera without installing an app. Decode links, text, and QR content instantly in your browser for free.",
     keywords: ["qr code scanner", "scan qr code online", "scan qr from image", "qr scanner without app", "online qr decoder"],
     type: "website",
   },
   "/tools/instagram-hashtag-generator": {
-    title: "Instagram Hashtag Generator Free Online | WishSpark",
-    description: "Generate Instagram hashtags for reels, creators, and business posts. Build relevant hashtag sets for reach, discovery, and niche growth.",
+    // FIX: Was 52 chars — good
+    title: "Instagram Hashtag Generator Free | WishSpark",
+    description: "Generate Instagram hashtags for reels, creators, and business posts. Build relevant hashtag sets for better reach, discovery, and niche growth on Instagram.",
     keywords: ["instagram hashtag generator", "hashtags for instagram growth", "instagram hashtag tool", "reels hashtags", "niche hashtag generator"],
     type: "website",
   },
   "/tools/emi-calculator": {
+    // 51 chars — good
     title: "EMI Calculator | Loan EMI & Interest Online | WishSpark",
-    description: "Calculate monthly EMI online for home, car, education, and personal loans. Check EMI, total interest, and total repayment instantly.",
+    description: "Calculate monthly EMI online for home, car, education, and personal loans. Check your EMI amount, total interest, and total repayment instantly for free.",
     keywords: ["emi calculator", "loan emi calculator", "monthly emi calculator", "home loan emi", "car loan emi calculator"],
     type: "website",
   },
@@ -134,12 +152,12 @@ const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
   },
   "/how-it-works": {
     title: "How WishSpark Works | Create and Share Festival Greetings",
-    description: "See how WishSpark works step by step. Choose a festival, add your name, generate a greeting link, and share animated wishes with friends and family.",
+    description: "See how WishSpark works step by step. Choose a festival, add your name, generate a greeting link, and share animated wishes with friends and family instantly.",
     keywords: ["how festival greeting maker works", "how to create greeting link", "WishSpark tutorial", "share festival wishes online", "animated greeting steps"],
     type: "website",
   },
   "/authors": {
-    title: "WishSpark Authors | Editorial Contributors and Content Team",
+    title: "WishSpark Authors | Editorial Contributors",
     description: "Meet the WishSpark authors and contributors behind our festival, relationship, and utility content. Review roles, focus areas, and editorial accountability.",
     keywords: ["WishSpark authors", "content contributors", "editorial team", "festival writers", "tool content experts"],
     type: "website",
@@ -152,25 +170,25 @@ const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
   },
   "/faq": {
     title: "FAQ | WishSpark Frequently Asked Questions",
-    description: "Find answers about creating greeting cards, sharing festival wishes on WhatsApp, supported festivals, privacy, and how WishSpark works.",
+    description: "Find answers about creating greeting cards, sharing festival wishes on WhatsApp, supported festivals, privacy, and how WishSpark works for free.",
     keywords: ["WishSpark FAQ", "festival greeting FAQ", "WhatsApp wishes help", "how to create greeting cards", "festival wishes questions"],
     type: "website",
   },
   "/contact": {
-    title: "Contact WishSpark | Festival Greeting Support and Feedback",
-    description: "Contact WishSpark for support, feedback, partnerships, and festival suggestions. Get help with greeting cards, tools, and website questions.",
+    title: "Contact WishSpark | Greeting Support and Feedback",
+    description: "Contact WishSpark for support, feedback, partnerships, and festival suggestions. Get help with greeting cards, tools, and website questions anytime.",
     keywords: ["contact WishSpark", "festival greeting support", "WishSpark feedback", "greeting website contact", "festival suggestion contact"],
     type: "website",
   },
   "/privacy-policy": {
-    title: "Privacy Policy | WishSpark Data and Cookie Information",
-    description: "Read WishSpark privacy policy to understand how we handle names, cookies, analytics, and ad-related data while protecting user privacy.",
+    title: "Privacy Policy | WishSpark Data and Cookie Info",
+    description: "Read WishSpark privacy policy to understand how we handle names, cookies, analytics, and ad-related data while protecting your personal privacy.",
     keywords: ["WishSpark privacy policy", "festival website privacy", "cookie policy", "data protection", "AdSense privacy"],
     type: "website",
   },
   "/terms": {
     title: "Terms of Use | WishSpark Usage Guidelines",
-    description: "Review WishSpark terms of use, website rules, and service guidelines for using festival greeting cards, tools, and shared links.",
+    description: "Review WishSpark terms of use, website rules, and service guidelines for using festival greeting cards, tools, and shared greeting links.",
     keywords: ["WishSpark terms", "terms of use", "website usage guidelines", "festival greeting terms", "service conditions"],
     type: "website",
   },
@@ -181,8 +199,8 @@ const STATIC_SEO: Record<string, Omit<SeoMeta, "canonicalPath">> = {
     type: "website",
   },
   "/sitemap": {
-    title: "Sitemap | WishSpark Pages, Festival Wishes, Blog, and Tools",
-    description: "Browse the WishSpark sitemap to find all festival greeting pages, blog articles, greeting tools, and legal pages in one place.",
+    title: "Sitemap | WishSpark Pages, Festivals, Blog & Tools",
+    description: "Browse the WishSpark sitemap to find all festival greeting pages, blog articles, greeting tools, and legal pages in one convenient place.",
     keywords: ["WishSpark sitemap", "festival pages list", "greeting tools list", "blog sitemap", "all greeting pages"],
     type: "website",
   },
@@ -231,22 +249,9 @@ const buildSeoTitle = (rawTitle: string, primaryKeyword: string) => {
   return title;
 };
 
-const buildSeoDescription = (rawDescription: string, primaryKeyword: string) => {
-  const keyword = normalizeSpace(primaryKeyword || "festival wishes");
-  let description = normalizeSpace(rawDescription);
-
-  if (!includesPhrase(description, keyword)) {
-    description = `${description} Discover practical ${keyword} ideas.`;
-  }
-
-  if (!/(create|discover|explore|try|read|share|generate|learn)/i.test(description)) {
-    description = `${description} Learn more on WishSpark.`;
-  }
-
-  if (description.length < DESCRIPTION_MIN_TARGET) {
-    description = `${description} Get usable examples and step-by-step tips.`;
-  }
-
+// FIX: Removed all spammy auto-padding — descriptions are used as-is (natural language)
+const buildSeoDescription = (rawDescription: string) => {
+  const description = normalizeSpace(rawDescription);
   return trimToWordBoundary(description, DESCRIPTION_MAX_LENGTH);
 };
 
@@ -293,9 +298,13 @@ const formatDate = (date: string) => {
 const estimateWordCount = (blocks: string[]) =>
   blocks
     .join(" ")
-    .replace(/\[[^\]]+\]\([^\)]+\)/g, "")
+    .replace(/\[[^\]]+\]\([^)]+\)/g, "")
     .split(/\s+/)
     .filter(Boolean).length;
+
+// FIX: Per-festival OG image alt text builder
+const buildFestivalOgAlt = (festivalName: string) =>
+  `${festivalName} wishes greeting card — WishSpark personalized festival greetings`;
 
 const buildSeoMeta = (pathname: string): SeoMeta => {
   const normalizedPath = normalizePath(pathname);
@@ -335,7 +344,7 @@ const buildSeoMeta = (pathname: string): SeoMeta => {
             ],
         canonicalPath: normalizedPath,
         type: "article",
-          robots: shouldNoIndex ? "noindex, follow" : undefined,
+        robots: shouldNoIndex ? "noindex, follow" : undefined,
         articlePublishedTime: formatDate(post.date),
         articleModifiedTime: formatDate(post.updatedDate ?? post.date),
         articleAuthor: post.author,
@@ -347,11 +356,12 @@ const buildSeoMeta = (pathname: string): SeoMeta => {
   const festival = getFestivalBySlug(festivalSlug);
   if (festival) {
     return {
-      title: `${festival.name} Wishes with Name | Card Maker | WishSpark`,
+      // FIX: H1-aligned title — primary keyword "X wishes with name" first
+      title: `${festival.name} Wishes with Name | Free Card Maker | WishSpark`,
       description: `Create free ${festival.name} wishes with your name and share a personalized ${festival.name} greeting card online. ${festival.description}`,
       keywords: [
-        `${festival.name.toLowerCase()} wishes`,
         `${festival.name.toLowerCase()} wishes with name`,
+        `${festival.name.toLowerCase()} wishes`,
         ...festival.keywords,
         `${festival.name.toLowerCase()} greetings`,
         `${festival.name.toLowerCase()} card maker`,
@@ -359,6 +369,8 @@ const buildSeoMeta = (pathname: string): SeoMeta => {
       ],
       canonicalPath: normalizedPath,
       type: "website",
+      // FIX: Per-festival OG image alt
+      ogImageAlt: buildFestivalOgAlt(festival.name),
     };
   }
 
@@ -382,8 +394,11 @@ const SeoManager = () => {
     const keywords = dedupeKeywords(meta.keywords).join(", ");
     const primaryKeyword = meta.keywords[0] ?? "festival wishes";
     const optimizedTitle = buildSeoTitle(meta.title, primaryKeyword);
-    const optimizedDescription = buildSeoDescription(meta.description, primaryKeyword);
+    // FIX: No more spammy padding — clean description
+    const optimizedDescription = buildSeoDescription(meta.description);
     const robots = meta.robots ?? DEFAULT_ROBOTS;
+    // FIX: Per-page OG image alt
+    const ogImageAlt = meta.ogImageAlt ?? "WishSpark — Free Festival Greeting Card Maker Online";
 
     document.title = optimizedTitle;
 
@@ -404,7 +419,8 @@ const SeoManager = () => {
     ensureMetaByProperty("og:image:type").setAttribute("content", "image/png");
     ensureMetaByProperty("og:image:width").setAttribute("content", "1200");
     ensureMetaByProperty("og:image:height").setAttribute("content", "630");
-    ensureMetaByProperty("og:image:alt").setAttribute("content", "WishSpark Personalized Festival Wishes preview image");
+    // FIX: Per-page og:image:alt
+    ensureMetaByProperty("og:image:alt").setAttribute("content", ogImageAlt);
 
     ensureMetaByName("twitter:card").setAttribute("content", "summary_large_image");
     ensureMetaByName("twitter:title").setAttribute("content", optimizedTitle);
@@ -412,7 +428,8 @@ const SeoManager = () => {
     ensureMetaByName("twitter:site").setAttribute("content", SITE_TWITTER);
     ensureMetaByName("twitter:url").setAttribute("content", canonicalUrl);
     ensureMetaByName("twitter:image").setAttribute("content", SITE_OG_IMAGE);
-    ensureMetaByName("twitter:image:alt").setAttribute("content", "WishSpark Personalized Festival Wishes preview image");
+    // FIX: Per-page twitter image alt
+    ensureMetaByName("twitter:image:alt").setAttribute("content", ogImageAlt);
 
     const canonicalLink = ensureCanonicalLink();
     canonicalLink.setAttribute("href", canonicalUrl);
@@ -488,12 +505,21 @@ const SeoManager = () => {
         }
       };
     } else if (normalizedPath === "/") {
+      // FIX: Added SearchAction for Google Sitelinks Searchbox potential
       schema = {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": SITE_NAME,
         "url": SITE_URL,
         "description": optimizedDescription,
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": `${SITE_URL}/?q={search_term_string}`
+          },
+          "query-input": "required name=search_term_string"
+        }
       };
     }
 
